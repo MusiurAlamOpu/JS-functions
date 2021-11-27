@@ -1,42 +1,50 @@
-const mainArray = [];
+/***
+ * 
+ * Here I'm gonna take an array and split that into some small chunks.
+ * 
+ * I hope, this may help you.
+ * 
+ */
+
+//taking array for spliting
+const testArray = [];
 
 for (let j = 0; j < 100; j++) {
-    mainArray.push(j + 1);
+    testArray.push(j + 1);
 }
 
-let chunkedArray = [];
-let tempArray = [];
-let tempObj = {};
+//main function
+const makeArrayToChunk = (mainArray) => {
+    let chunkedArray = [], tempArray = [], tempObj = {}, counter = 0;
 
-let counter = 0;
-let indexCounter = 0;
+    for (let i = 0; i < mainArray.length; i++) {
 
-for (let i = 0; i < mainArray.length; i++) {
+        if (i !== 0 && i % 5 === 0) {
+            tempArray.push(mainArray[i]);
+            tempObj[counter.toString()] = tempArray;
 
-    if (i !== 0 && i % 5 === 0) {
-        tempArray.push(mainArray[i]);
+            chunkedArray.push(tempObj)
 
-        tempObj[counter.toString()] = tempArray;
+            tempArray = [];
+            tempObj = {};
+            counter = counter + 1;
 
-        chunkedArray.push(tempObj)
+        } else {
+            tempArray.push(mainArray[i]);
+            tempObj[counter.toString()] = tempArray;
 
-        tempArray = [];
-        tempObj = {};
+        }
 
-        counter = counter + 1;
-
-    } else {
-        tempArray.push(mainArray[i]);
-
-        tempObj[counter.toString()] = tempArray;
+        if (i === (mainArray.length - 1)) {
+            chunkedArray.push(tempObj);
+        }
 
     }
 
-    if (i === (mainArray.length - 1)) {
-        chunkedArray.push(tempObj);
-    }
-
+    return chunkedArray;
 }
 
-console.log(counter);
-console.log(chunkedArray);
+
+// result
+let result = makeArrayToChunk(testArray);
+console.log(result);
