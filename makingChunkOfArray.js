@@ -13,36 +13,46 @@ for (let j = 0; j < 50; j++) {
     testArray.push(j + 1);
 }
 
+
 //main function
 const makeArrayToChunk = (mainArray) => {
+
     let chunkedArray = [], tempArray = [], tempObj = {}, counter = 0;
 
     for (let i = 0; i < mainArray.length; i++) {
 
         if (i !== 0 && i % 5 === 0) {
+
+            //pushing element in current chunk
             tempArray.push(mainArray[i]);
             tempObj[counter.toString()] = tempArray;
 
+            //pushing first to second last chunks
             if (Object.keys(tempObj).length !== 0) {
                 chunkedArray.push(tempObj);
 
             }
 
+            //initialization of new chunk
             tempArray = [];
             tempObj = {};
             counter = counter + 1;
 
         } else {
+
+            //pushing element in current chunk
             tempArray.push(mainArray[i]);
             tempObj[counter.toString()] = tempArray;
 
         }
-
+        //pushing last chunk
         if (i === (mainArray.length - 1)) {
+
             if (Object.keys(tempObj).length !== 0) {
                 chunkedArray.push(tempObj);
 
             }
+
         }
 
     }
